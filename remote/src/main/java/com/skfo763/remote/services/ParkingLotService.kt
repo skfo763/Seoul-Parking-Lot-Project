@@ -1,7 +1,6 @@
 package com.skfo763.remote.services
 
 import com.skfo763.remote.RetroBuilder
-import com.skfo763.remote.constants.ParkingLotApiConstant
 import com.skfo763.remote.entites.ParkInfoEntity
 import io.reactivex.Flowable
 import retrofit2.http.GET

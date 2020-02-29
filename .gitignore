@@ -10,6 +10,6 @@
 .DS_Store
 /build
 /captures
-/remote/src/main/java/com/skfo763/remote/constants/ParkingLotApiConstant
+/remote/src/main/java/com/skfo763/remote/constants/ParkingLotApiConstant.kt
 .externalNativeBuild
 .cxx
