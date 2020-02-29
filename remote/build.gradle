@@ -1,0 +1,21 @@
+apply from: '../commonsgradle/common.library.gradle'
+
+/*
+    buildConfigField "String", "OPEN_API_KEY", "\"${properties.getProperty('default.open_api_key', '')}\""
+    buildConfigField "String", "OPEN_API_BASE_URL", "\"http://openapi.seoul.go.kr:8088/\""
+ */
+
+dependencies {
+    def remoteModuleDependencies = rootProject.ext.remoteDependencies
+
+    implementation remoteModuleDependencies.okHttp
+    implementation remoteModuleDependencies.loggingInterceptor
+    implementation remoteModuleDependencies.retrofit
+    implementation remoteModuleDependencies.gson
+    implementation remoteModuleDependencies.gsonConverter
+    implementation remoteModuleDependencies.rxjavaAdapter
+    implementation remoteModuleDependencies.rxjava
+}
+
+sourceCompatibility = "7"
+targetCompatibility = "7"

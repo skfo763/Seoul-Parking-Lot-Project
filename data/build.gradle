@@ -1,0 +1,9 @@
+apply from: '../commonsgradle/common.library.gradle'
+
+dependencies {
+    def dataModuleDependencies = rootProject.ext.dataDependencies
+
+    // rxJava
+    implementation dataModuleDependencies.rxJava
+    implementation dataModuleDependencies.rxAndroid
+}

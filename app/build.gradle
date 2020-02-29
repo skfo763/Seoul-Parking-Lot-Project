@@ -1,0 +1,22 @@
+apply from: '../commonsgradle/common.feature.gradle'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    defaultConfig {
+        applicationId "com.skfo763.seoul_parking_lot"
+    }
+}
+
+dependencies {
+    def appModuleDependencies = rootProject.ext.appDependencies
+
+    // inner modules
+    implementation project(':cache')
+    implementation project(':data')
+
+    // room
+    implementation appModuleDependencies.room
+    implementation appModuleDependencies.roomKtx
+    implementation appModuleDependencies.roomRx
+    kapt appModuleDependencies.roomAnnotation
+}

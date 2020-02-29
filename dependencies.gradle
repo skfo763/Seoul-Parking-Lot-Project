@@ -1,0 +1,100 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+ext {
+    //Android & Kotlin
+    kotlinVersion = "1.3.61"
+    androidBuildToolsVersion = "29.0.2"
+    androidMinSdkVersion = 21
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
+    recyclerViewVersion = '1.1.0'
+    appCompatVersion = '1.1.0'
+    ktxVersion = '1.2.0'
+    constraintLayoutVersion = '1.1.3'
+    androidAnnotationVersion = '1.1.0'
+
+    // Test
+    junitVersion = '4.12'
+    androidJunitVersion = '1.1.1'
+    espressoVersion = '3.2.0'
+
+    // RxJava
+    rxJavaVersion = '2.2.13'
+    rxAndroidVersion = '2.1.0'
+
+    // Gson & Retrofit
+    gsonVersion = '2.8.6'
+    okHttpVersion = '4.4.0'
+    retrofitVersion = '2.7.1'
+
+    // Room
+    roomVersion = "2.2.4"
+
+    // Glide
+    glideVersion = '4.11.0'
+
+    // Dagger
+    daggerVersion = '2.26'
+
+    // Timber
+    timberVersion = '4.7.1'
+
+    // default dependencies for common.feature.gradle
+    commonUiDependencies = [
+            kotlin:                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
+            appCompat:              "androidx.appcompat:appcompat:$appCompatVersion",
+            ktx:                    "androidx.core:core-ktx:$ktxVersion",
+            constraintLayout:       "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
+            dagger:                 "com.google.dagger:dagger:$daggerVersion",
+            daggerAndroid:          "com.google.dagger:dagger-android:$daggerVersion",
+            daggerCompiler:         "com.google.dagger:dagger-compiler:$daggerVersion",
+            daggerAnnotation:       "com.google.dagger:dagger-android-processor:$daggerVersion",
+            timber:                 "com.jakewharton.timber:timber:$timberVersion"
+    ]
+
+    commonUiTestDependencies = [
+            jUnit:                  "junit:junit:$junitVersion",
+            androidJUnit:           "androidx.test.ext:junit:$androidJunitVersion",
+            espresso:               "androidx.test.espresso:espresso-core:$espressoVersion"
+    ]
+
+    // dependencies for 'app' module
+    appDependencies = [
+            room:                   "androidx.room:room-runtime:$roomVersion",
+            roomAnnotation:         "androidx.room:room-compiler:$roomVersion",
+            roomKtx:                "androidx.room:room-ktx:$roomVersion",
+            roomRx:                 "androidx.room:room-rxjava2:$roomVersion"
+    ]
+
+    // dependencies for 'cache' module
+    cacheDependencies = [
+            room:                   "androidx.room:room-runtime:$roomVersion",
+            roomAnnotation:         "androidx.room:room-compiler:$roomVersion",
+            roomKtx:                "androidx.room:room-ktx:$roomVersion",
+            roomRx:                 "androidx.room:room-rxjava2:$roomVersion"
+    ]
+
+    // dependencies for 'data' module
+    dataDependencies = [
+            rxJava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    ]
+
+    /*
+    implementation 'com.google.code.gson:gson:2.8.6'
+     */
+    remoteDependencies = [
+            okHttp:                 "com.squareup.okhttp3:okhttp:$okHttpVersion",
+            loggingInterceptor:     "com.squareup.okhttp3:logging-interceptor:$okHttpVersion",
+            retrofit:               "com.squareup.retrofit2:retrofit:$retrofitVersion",
+            gsonConverter:          "com.squareup.retrofit2:converter-gson:$retrofitVersion",
+            gson:                   "com.google.code.gson:gson:$gsonVersion",
+            rxjavaAdapter:          "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
+            rxjava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+
+    ]
+}

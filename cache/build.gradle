@@ -1,0 +1,15 @@
+apply from: '../commonsgradle/common.androidlib.gradle'
+apply plugin: 'kotlin-android-extensions'
+
+dependencies {
+    def localModuleDependencies = rootProject.ext.cacheDependencies
+
+    // inner module
+    implementation project(':data')
+
+    // room
+    implementation localModuleDependencies.room
+    implementation localModuleDependencies.roomKtx
+    implementation localModuleDependencies.roomRx
+    kapt localModuleDependencies.roomAnnotation
+}

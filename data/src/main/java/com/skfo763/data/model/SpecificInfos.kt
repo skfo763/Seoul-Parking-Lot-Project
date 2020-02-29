@@ -1,0 +1,50 @@
+package com.skfo763.data.model
+
+data class BasicInfo(
+    val name: String,
+    val address: String,
+    val parkingCode: String,
+    val parkingType: String,
+    val parkingTypeName: String,
+    val operationRule: String,
+    val operationRuleName: String,
+    val telNo: String,
+    val isCharge: String,
+    val isChargeInName: String,
+    val groupNumber: String,
+    val recentSyncTime: String
+)
+
+data class SpecificParkingInfo(
+    val queueStatus: String,
+    val queueStatusName: String,
+    val capacity: Double,
+    val currentParking: Double,
+    val currentParkingUpdateTime: String,
+    val weekdayBeginTime: String,
+    val weekdayEndTime: String,
+    val weekendStartTime: String,
+    val weekendEndTime: String,
+    val holidayBeginTime: String,
+    val holidayEndTime: String,
+    val isNightFree: String,
+    val isNightFreeInName: String,
+    val isSaturdayFree: String,
+    val isSaturdayFreeInName: String,
+    val isHolidayFree: String,
+    val isHolidayFreeInName: String,
+    val priceInMonthlyFulltime: String,
+    val price: Double,
+    val pricePerMinute: Double,
+    val additionalPrice: Double,
+    val additionalPricePerMinute: Double,
+    val priceForBus: Double,
+    val pricePerMinuteForBus: Double,
+    val additionalPriceForBus: Double,
+    val additionalPricePerMinuteForBus: Double,
+    val dailyMaximumCharge: Double,
+    val latitude: Double,
+    val longitude: Double,
+    val assignCode: String,
+    val assignCodeName: String
+)

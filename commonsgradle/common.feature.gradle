@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion gradle.compileSdk
+    buildToolsVersion gradle.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion gradle.minSdk
+        targetSdkVersion gradle.targetSdk
+        versionCode gradle.versionCode
+        versionName gradle.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def commonDependencies = rootProject.ext.commonUiDependencies
+    def commonTestDependencies = rootProject.ext.commonUiTestDependencies
+
+    // Basic
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // android & kotlin
+    implementation commonDependencies.kotlin
+    implementation commonDependencies.appCompat
+    implementation commonDependencies.ktx
+    implementation commonDependencies.constraintLayout
+
+    // dagger
+    implementation commonDependencies.dagger
+    implementation commonDependencies.daggerAndroid
+    kapt commonDependencies.daggerCompiler
+    kapt commonDependencies.daggerAnnotation
+
+    // Timber
+    implementation commonDependencies.timber
+
+    // test
+    testImplementation commonTestDependencies.jUnit
+    androidTestImplementation commonTestDependencies.androidJUnit
+    androidTestImplementation commonTestDependencies.espresso
+}

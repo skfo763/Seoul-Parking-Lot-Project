@@ -1,0 +1,18 @@
+rootProject.name='Seoul-Parking-Lot'
+include ':app'
+include ':data'
+include ':domain'
+include ':presentation'
+include ':remote'
+include ':cache'
+
+gradle.ext {
+    versionCode = 1
+    versionName = '0.0.1'
+    buildToolsVersion = '29.0.2'
+
+    set('minSdk', 21)
+    set('targetSdk', 29)
+    set('compileSdk', 29)
+}
+
