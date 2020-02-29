@@ -3,6 +3,9 @@ apply from: '../commonsgradle/common.library.gradle'
 dependencies {
     def dataModuleDependencies = rootProject.ext.dataDependencies
 
+    // inner module
+    implementation project(':domain')
+
     // rxJava
     implementation dataModuleDependencies.rxJava
     implementation dataModuleDependencies.rxAndroid

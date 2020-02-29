@@ -1,21 +1,6 @@
 package com.skfo763.data.model
 
-data class BasicInfo(
-    val name: String,
-    val address: String,
-    val parkingCode: String,
-    val parkingType: String,
-    val parkingTypeName: String,
-    val operationRule: String,
-    val operationRuleName: String,
-    val telNo: String,
-    val isCharge: String,
-    val isChargeInName: String,
-    val groupNumber: String,
-    val recentSyncTime: String
-)
-
-data class SpecificParkingInfo(
+data class ParkingLotSpecificInfoEntity(
     val queueStatus: String,
     val queueStatusName: String,
     val capacity: Double,

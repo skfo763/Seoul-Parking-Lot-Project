@@ -1,25 +1,17 @@
-package com.skfo763.parking_lot_project.services
+package com.skfo763.remote.services
 
 import com.skfo763.remote.RetroBuilder
+import com.skfo763.remote.constants.ParkingLotApiConstant
 import com.skfo763.remote.entites.ParkInfoEntity
-import io.reactivex.Single
+import io.reactivex.Flowable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-class ParkingLotService {
-    private object Holder {
-        val INSTANCE =
-            ParkingLotService()
+object ParkingLotService {
+    fun getParkingLotService(isDebug: Boolean): ParkingLotApi {
+        return RetroBuilder.i.getRetrofit(isDebug)
+            .create(ParkingLotApi::class.java)
     }
-
-    companion object {
-        val i: ParkingLotService by lazy { Holder.INSTANCE }
-    }
-
-    val service =
-        RetroBuilder.i.getRetrofit().create(
-            ParkingLotApi::class.java)
-
 }
 
 interface ParkingLotApi {
@@ -41,13 +33,13 @@ interface ParkingLotApi {
      */
     @GET("$BASE_ENDPOINT/{address}/{parkingCode}/{queueStatus}")
     fun getParkingLotData(
-        @Path("serviceKey") serviceKey: String = BuildConfig.OPEN_API_KEY,
+        @Path("serviceKey") serviceKey: String = ParkingLotApiConstant.API_KEY,
         @Path("type") type: String = CONTENT_TYPE,
         @Path("service") serviceType: String = SERVICE_TYPE,
         @Path("startIndex") startIndex: Int = 1,
         @Path("endIndex") endIndex: Int = 10,
         @Path("address", encoded = true) region: String = " ",
-        @Path("parkingCode") parkingCode: Int? = null,
-        @Path("queueStatus") queueStatus: Int? = null
-    ): Single<ParkInfoEntity>
+        @Path("parkingCode") parkingCode: String = " ",
+        @Path("queueStatus") queueStatus: String = " "
+    ): Flowable<ParkInfoEntity>
 }

@@ -1,4 +1,4 @@
-package com.skfo.entity
+package com.skfo763.remote.entites
 
 import com.google.gson.annotations.SerializedName
 

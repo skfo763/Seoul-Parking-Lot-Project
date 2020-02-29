@@ -16,6 +16,11 @@ android {
         consumerProguardFiles 'consumer-rules.pro'
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,8 +30,8 @@ android {
 }
 
 dependencies {
-    def commonDependencies = rootProject.ext.commonUiDependencies
-    def commonTestDependencies = rootProject.ext.commonUiTestDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
+    def commonTestDependencies = rootProject.ext.commonTestDependencies
 
     // Basic
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -8,6 +8,10 @@ apply from: '../commonsgradle/common.library.gradle'
 dependencies {
     def remoteModuleDependencies = rootProject.ext.remoteDependencies
 
+    // inner module
+    implementation project(':data')
+
+    // api library
     implementation remoteModuleDependencies.okHttp
     implementation remoteModuleDependencies.loggingInterceptor
     implementation remoteModuleDependencies.retrofit
@@ -16,6 +20,3 @@ dependencies {
     implementation remoteModuleDependencies.rxjavaAdapter
     implementation remoteModuleDependencies.rxjava
 }
-
-sourceCompatibility = "7"
-targetCompatibility = "7"

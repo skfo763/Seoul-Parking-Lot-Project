@@ -3,6 +3,7 @@ package com.skfo763.cache.dao
 import androidx.room.*
 import com.skfo763.cache.DBConstants
 import com.skfo763.cache.entities.ParkingLotCacheEntity
+import io.reactivex.Flowable
 
 @Dao
 interface ParkingLotCacheDao {
@@ -22,5 +23,5 @@ interface ParkingLotCacheDao {
     fun loadCacheDataWithAddress(address: String): List<ParkingLotCacheEntity>
 
     @Query("SELECT * FROM ${DBConstants.ParkingLotTableName} WHERE is_charge = :isCharge")
-    fun loadCacheDataWithChargeInfo(isCharge: String): List<ParkingLotCacheEntity>
+    fun loadCacheDataWithChargeInfo(isCharge: String): Flowable<List<ParkingLotCacheEntity>>
 }

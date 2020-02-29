@@ -43,8 +43,8 @@ ext {
     // Timber
     timberVersion = '4.7.1'
 
-    // default dependencies for common.feature.gradle
-    commonUiDependencies = [
+    // default dependencies for common.~.gradle
+    commonDependencies = [
             kotlin:                 "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion",
             appCompat:              "androidx.appcompat:appcompat:$appCompatVersion",
             ktx:                    "androidx.core:core-ktx:$ktxVersion",
@@ -56,7 +56,7 @@ ext {
             timber:                 "com.jakewharton.timber:timber:$timberVersion"
     ]
 
-    commonUiTestDependencies = [
+    commonTestDependencies = [
             jUnit:                  "junit:junit:$junitVersion",
             androidJUnit:           "androidx.test.ext:junit:$androidJunitVersion",
             espresso:               "androidx.test.espresso:espresso-core:$espressoVersion"
@@ -95,6 +95,10 @@ ext {
             gson:                   "com.google.code.gson:gson:$gsonVersion",
             rxjavaAdapter:          "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion",
             rxjava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    ]
 
+    domainDependencies = [
+            rxJava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     ]
 }

@@ -20,10 +20,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    def commonDependencies = rootProject.ext.commonUiDependencies
+    def commonDependencies = rootProject.ext.commonDependencies
 
     // Basic
     implementation fileTree(dir: 'libs', include: ['*.jar'])
