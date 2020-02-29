@@ -1,3 +1,5 @@
 package com.skfo763.data
 
-class ParkingLotDataRepository()
+import com.skfo763.domain.ParkingLotRepository
+
+class ParkingLotDataRepository(): ParkingLotRepository
