@@ -1,6 +1,7 @@
 package com.skfo763.remote
 
 import com.google.gson.Gson
+import com.skfo763.remote.constants.ParkingLotApiConstant
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
