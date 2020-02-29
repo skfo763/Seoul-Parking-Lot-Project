@@ -1,0 +1,8 @@
+package com.skfo763.remote.constants
+
+class ParkingLotApiConstant {
+    companion object {
+        const val API_KEY = "sample_api_key"
+        const val OPEN_API_URL = "sample_api_url"
+    }
+}
