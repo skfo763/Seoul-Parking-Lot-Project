@@ -1,9 +1,7 @@
 package com.skfo763.parking_lot_project.services
 
-import com.skfo763.remote.BuildConfig
 import com.skfo763.remote.RetroBuilder
 import com.skfo763.remote.entites.ParkInfoEntity
-import com.skfo763.remote.services.RetroBuilder
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

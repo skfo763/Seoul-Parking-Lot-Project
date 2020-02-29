@@ -16,8 +16,8 @@ abstract class LocalCacheModule {
     @Module
     companion object {
 
-        @JvmStatic
         @Provides
+        @JvmStatic
         fun provideParkingLotDatabase(application: Application): ParkingLotDatabase {
             return Room.databaseBuilder(
                 application.applicationContext,
