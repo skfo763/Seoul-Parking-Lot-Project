@@ -17,6 +17,10 @@ ext {
     constraintLayoutVersion = '1.1.3'
     androidAnnotationVersion = '1.1.0'
 
+    // AAC & Navigation
+    navVersion = '2.3.0-alpha01'
+    navSafeArgVersion = '2.1.0'
+
     // Test
     junitVersion = '4.12'
     androidJunitVersion = '1.1.1'
@@ -59,7 +63,8 @@ ext {
     commonTestDependencies = [
             jUnit:                  "junit:junit:$junitVersion",
             androidJUnit:           "androidx.test.ext:junit:$androidJunitVersion",
-            espresso:               "androidx.test.espresso:espresso-core:$espressoVersion"
+            espresso:               "androidx.test.espresso:espresso-core:$espressoVersion",
+            navTest:                "androidx.navigation:navigation-testing:$navVersion"
     ]
 
     // dependencies for 'app' module
@@ -67,7 +72,9 @@ ext {
             room:                   "androidx.room:room-runtime:$roomVersion",
             roomAnnotation:         "androidx.room:room-compiler:$roomVersion",
             roomKtx:                "androidx.room:room-ktx:$roomVersion",
-            roomRx:                 "androidx.room:room-rxjava2:$roomVersion"
+            roomRx:                 "androidx.room:room-rxjava2:$roomVersion",
+            navFragment:            "androidx.navigation:navigation-fragment-ktx:$navVersion",
+            navUi:                  "androidx.navigation:navigation-ui-ktx:$navVersion",
     ]
 
     // dependencies for 'cache' module

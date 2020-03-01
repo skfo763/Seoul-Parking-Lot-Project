@@ -1,5 +1,6 @@
 apply from: '../commonsgradle/common.feature.gradle'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
     defaultConfig {
@@ -20,5 +21,10 @@ dependencies {
     implementation appModuleDependencies.room
     implementation appModuleDependencies.roomKtx
     implementation appModuleDependencies.roomRx
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt appModuleDependencies.roomAnnotation
+
+    // navigation component
+    implementation appModuleDependencies.navFragment
+    implementation appModuleDependencies.navUi
 }
