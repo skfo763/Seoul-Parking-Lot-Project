@@ -1,7 +1,7 @@
 package com.skfo763.data.repository
 
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
-import com.skfo763.data.model.ParkingLotSpecificInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
 import io.reactivex.Flowable
 
 interface ParkingLotRemote {

@@ -1,6 +1,6 @@
 package com.skfo763.data.repository
 
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single

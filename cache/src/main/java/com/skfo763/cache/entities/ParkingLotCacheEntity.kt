@@ -42,5 +42,17 @@ data class ParkingLotCacheEntity (
     val groupNumber: String,
 
     @ColumnInfo(name = "recent_sync_time")
-    val recentSyncTime: String
+    val recentSyncTime: String,
+
+    @ColumnInfo(name = "queue_status")
+    val queueStatus: String,
+
+    @ColumnInfo(name = "queue_status_name")
+    val queueStatusName: String,
+
+    @ColumnInfo(name = "latitude")
+    val latitude: Double,
+
+    @ColumnInfo(name = "longitude")
+    val longitude: Double
 )

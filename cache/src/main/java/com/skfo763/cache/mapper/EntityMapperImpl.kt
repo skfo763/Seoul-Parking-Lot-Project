@@ -1,7 +1,7 @@
 package com.skfo763.cache.mapper
 
 import com.skfo763.cache.entities.ParkingLotCacheEntity
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import javax.inject.Inject
 
 class EntityMapperImpl @Inject constructor():
@@ -20,7 +20,11 @@ class EntityMapperImpl @Inject constructor():
             type.isCharge,
             type.isChargeInName,
             type.groupNumber,
-            type.recentSyncTime
+            type.recentSyncTime,
+            type.queueStatus,
+            type.queueStatusName,
+            type.latitude,
+            type.longitude
         )
     }
 
@@ -37,7 +41,11 @@ class EntityMapperImpl @Inject constructor():
             type.isCharge,
             type.isChargeInName,
             type.groupNumber,
-            type.recentSyncTime
+            type.recentSyncTime,
+            type.queueStatus,
+            type.queueStatusName,
+            type.latitude,
+            type.longitude
         )
     }
 }

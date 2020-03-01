@@ -1,7 +1,7 @@
 package com.skfo763.remote.mapper
 
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
-import com.skfo763.data.model.ParkingLotSpecificInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
 import com.skfo763.remote.entites.ParkingLotEntity
 
 class ParkingLotRemoteMapper :
@@ -20,7 +20,11 @@ class ParkingLotRemoteMapper :
             type.isCharge,
             type.isChargeInName,
             type.groupNumber,
-            type.recentSyncTime
+            type.recentSyncTime,
+            type.queueStatus,
+            type.queueStatusName,
+            type.latitude,
+            type.longitude
         )
     }
 

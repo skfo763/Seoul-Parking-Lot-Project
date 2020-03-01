@@ -2,7 +2,7 @@ package com.skfo763.cache
 
 import com.skfo763.cache.mapper.EntityMapperImpl
 import com.skfo763.cache.sharedprefs.SharedPreferenceHelper
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.repository.ParkingLotCache
 import io.reactivex.Completable
 import io.reactivex.Flowable

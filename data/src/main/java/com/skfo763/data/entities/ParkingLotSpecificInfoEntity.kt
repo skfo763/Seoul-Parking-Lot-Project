@@ -1,4 +1,4 @@
-package com.skfo763.data.model
+package com.skfo763.data.entities
 
 data class ParkingLotSpecificInfoEntity(
     val queueStatus: String,

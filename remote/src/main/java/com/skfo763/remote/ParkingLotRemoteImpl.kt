@@ -1,10 +1,10 @@
 package com.skfo763.remote
 
-import com.skfo763.remote.entites.ParkingLotEntity
-import com.skfo763.data.model.ParkingLotBaseInfoEntity
-import com.skfo763.data.model.ParkingLotSpecificInfoEntity
+import com.skfo763.data.entities.ParkingLotBaseInfoEntity
+import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
 import com.skfo763.data.repository.ParkingLotRemote
 import com.skfo763.remote.constants.NetworkErrorCode
+import com.skfo763.remote.entites.ParkingLotEntity
 import com.skfo763.remote.mapper.ParkingLotRemoteMapper
 import com.skfo763.remote.services.ParkingLotApi
 import io.reactivex.Flowable

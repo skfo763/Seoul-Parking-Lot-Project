@@ -3,9 +3,9 @@ package com.skfo763.seoul_parking_lot.di.modules
 import com.skfo763.data.ParkingLotDataRepository
 import com.skfo763.data.executor.JobExecutor
 import com.skfo763.domain.ParkingLotRepository
+import com.skfo763.domain.executor.ThreadExecutor
 import dagger.Binds
 import dagger.Module
-import org.buffer.android.boilerplate.domain.executor.ThreadExecutor
 
 @Module
 abstract class DataModule {

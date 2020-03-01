@@ -1,6 +1,6 @@
-package com.skfo763.data.model
+package com.skfo763.domain.model
 
-data class ParkingLotBaseInfoEntity (
+data class ParkingLotBaseInfoModel (
     val parkingCode: String,
     val name: String,
     val address: String,
@@ -12,5 +12,9 @@ data class ParkingLotBaseInfoEntity (
     val isCharge: String,
     val isChargeInName: String,
     val groupNumber: String,
-    val recentSyncTime: String
+    val recentSyncTime: String,
+    val queueStatus: String,
+    val queueStatusName: String,
+    val latitude: Double,
+    val longitude: Double
 )

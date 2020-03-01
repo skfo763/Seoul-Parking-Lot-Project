@@ -2,10 +2,7 @@ package com.skfo763.seoul_parking_lot.di
 
 import android.app.Application
 import com.skfo763.seoul_parking_lot.ParkingLotApplication
-import com.skfo763.seoul_parking_lot.di.modules.ApplicationModule
-import com.skfo763.seoul_parking_lot.di.modules.DataModule
-import com.skfo763.seoul_parking_lot.di.modules.LocalCacheModule
-import com.skfo763.seoul_parking_lot.di.modules.RemoteModule
+import com.skfo763.seoul_parking_lot.di.modules.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -17,7 +14,8 @@ import javax.inject.Singleton
     ApplicationModule::class,
     LocalCacheModule::class,
     RemoteModule::class,
-    DataModule::class
+    DataModule::class,
+    DomainModule::class
 ])
 interface ApplicationComponent {
 
