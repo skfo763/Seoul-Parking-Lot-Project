@@ -6,6 +6,10 @@ android {
     defaultConfig {
         applicationId "com.skfo763.seoul_parking_lot"
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
