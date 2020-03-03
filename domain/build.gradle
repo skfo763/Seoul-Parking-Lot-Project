@@ -1,3 +1,4 @@
+apply from: '../commonsgradle/common.library.gradle'
 apply plugin: 'java-library'
 apply plugin: 'kotlin'
 

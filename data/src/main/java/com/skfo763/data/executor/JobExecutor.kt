@@ -39,14 +39,9 @@ open class JobExecutor @Inject constructor(): ThreadExecutor {
     }
 
     companion object {
-
         private const val INITIAL_POOL_SIZE = 3
         private const val MAX_POOL_SIZE = 5
-
-        // Sets the amount of time an idle thread waits before terminating
         private const val KEEP_ALIVE_TIME = 10
-
-        // Sets the Time Unit to seconds
         private val KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS
     }
 }
