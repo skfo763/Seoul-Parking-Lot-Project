@@ -55,6 +55,7 @@ ext {
             constraintLayout:       "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion",
             dagger:                 "com.google.dagger:dagger:$daggerVersion",
             daggerAndroid:          "com.google.dagger:dagger-android:$daggerVersion",
+            daggerAndroidSupport:   "com.google.dagger:dagger-android-support:$daggerVersion",
             daggerCompiler:         "com.google.dagger:dagger-compiler:$daggerVersion",
             daggerAnnotation:       "com.google.dagger:dagger-android-processor:$daggerVersion",
             timber:                 "com.jakewharton.timber:timber:$timberVersion"
@@ -107,5 +108,10 @@ ext {
     domainDependencies = [
             rxJava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
             rxAndroid:              "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    ]
+
+    presentationDependencies = [
+            rxJava:                 "io.reactivex.rxjava2:rxjava:$rxJavaVersion",
+            rxAndroid:              "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
     ]
 }

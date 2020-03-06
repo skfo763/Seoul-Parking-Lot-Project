@@ -12,6 +12,8 @@ interface ParkingLotRepository {
 
     fun loadAllBaseInfoData(): Flowable<List<ParkingLotBaseInfoModel>>
 
+    fun loadAllBaseInfoDataFromCache(): Flowable<List<ParkingLotBaseInfoModel>>
+
     fun loadBaseInfoWithRegion(region: String): Flowable<List<ParkingLotBaseInfoModel>>
 
     fun loadBaseInfoWithStatus(status: Boolean): Flowable<List<ParkingLotBaseInfoModel>>

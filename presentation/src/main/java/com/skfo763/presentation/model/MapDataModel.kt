@@ -1,10 +1,9 @@
 package com.skfo763.presentation.model
 
-data class HomeDataModel (
+data class MapDataModel (
     val parkingCode: String,
     val name: String,
-    val address: String,
-    val parkingType: String,
+    val address: String,val parkingType: String,
     val parkingTypeName: String,
     val operationRule: String,
     val operationRuleName: String,

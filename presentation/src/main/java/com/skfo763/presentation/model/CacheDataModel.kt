@@ -1,6 +1,6 @@
 package com.skfo763.presentation.model
 
-data class HomeDataModel (
+data class CacheDataModel (
     val parkingCode: String,
     val name: String,
     val address: String,

@@ -44,6 +44,7 @@ dependencies {
 
     // dagger
     implementation commonDependencies.dagger
+    implementation commonDependencies.daggerAndroidSupport
     implementation commonDependencies.daggerAndroid
     kapt commonDependencies.daggerCompiler
     kapt commonDependencies.daggerAnnotation

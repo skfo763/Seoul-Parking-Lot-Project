@@ -22,14 +22,21 @@ class ParkingLotDataRepository
     }
 
     override fun loadAllBaseInfoData(): Flowable<List<ParkingLotBaseInfoModel>> {
+        return factory.getRemoteDataSource().getParkingLotBaseData()
+            .flatMap {
+                Flowable.just(it.map { entity ->
+                    mapper.mapBaseModelFromEntity(entity)
+                })
+            }
+    }
+
+    override fun loadAllBaseInfoDataFromCache(): Flowable<List<ParkingLotBaseInfoModel>> {
         return factory.getCacheDataSource().isCached()
             .flatMapPublisher {
                 factory.getDataSoruce(it).getParkingLotBaseData()
             }
             .flatMap {
-                Flowable.just(it.map { entity ->
-                    mapper.mapBaseModelFromEntity(entity)
-                })
+                Flowable.just(it.map { entity -> mapper.mapBaseModelFromEntity(entity) })
             }
     }
 

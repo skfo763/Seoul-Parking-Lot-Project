@@ -19,7 +19,7 @@ dependencies {
     implementation project(':cache')
     implementation project(':remote')
     implementation project(':data')
-    implementation project(':domain')
+    implementation project(':presentation')
 
     // room
     implementation appModuleDependencies.room
