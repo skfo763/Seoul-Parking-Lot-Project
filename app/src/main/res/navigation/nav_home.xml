@@ -6,7 +6,7 @@
     app:startDestination="@id/homeFragment">
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.skfo763.seoul_parking_lot.ui.HomeFragment"
+        android:name="com.skfo763.seoul_parking_lot.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -15,8 +15,16 @@
     </fragment>
     <fragment
         android:id="@+id/mapFragment"
-        android:name="com.skfo763.seoul_parking_lot.ui.MapFragment"
+        android:name="com.skfo763.seoul_parking_lot.ui.map.MapFragment"
         android:label="fragment_map"
         tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment_to_cacheFragment"
+            app:destination="@id/cacheFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cacheFragment"
+        android:name="com.skfo763.seoul_parking_lot.ui.cache.CacheFragment"
+        android:label="fragment_cache"
+        tools:layout="@layout/fragment_cache"/>
 </navigation>

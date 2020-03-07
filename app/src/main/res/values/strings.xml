@@ -2,4 +2,5 @@
     <string name="app_name">Seoul-Parking-Lot</string>
     <string name="menu_main_bnv_home">홈</string>
     <string name="menu_main_bnv_map">지도</string>
+    <string name="menu_main_bnv_cache">즐겨찾기</string>
 </resources>

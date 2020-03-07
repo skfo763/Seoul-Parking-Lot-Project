@@ -7,19 +7,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.home.HomeFragment">
+        tools:context="ui.cache.CacheFragment">
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/test_button"
+            android:id="@+id/test_button_three"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:text="마법의 버튼"
+            android:text="마법의 버튼 3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
-

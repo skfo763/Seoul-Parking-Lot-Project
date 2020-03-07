@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.skfo763.seoul_parking_lot.R
+import com.skfo763.seoul_parking_lot.utils.KeyHashUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setNavigation()
+        KeyHashUtils.getKeyHash(this, TAG)
     }
 
     private fun setNavigation() {

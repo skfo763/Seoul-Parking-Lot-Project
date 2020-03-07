@@ -3,6 +3,7 @@
     package="com.skfo763.seoul_parking_lot">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -13,6 +14,9 @@
         android:theme="@style/AppTheme"
         android:name=".ParkingLotApplication"
         android:usesCleartextTraffic="true">
+        <meta-data android:name="com.kakao.sdk.AppKey"
+            android:value="b86ee39345dc30bad7145b72888b9744"/>
+
         <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

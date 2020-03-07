@@ -15,6 +15,9 @@ android {
 dependencies {
     def appModuleDependencies = rootProject.ext.appDependencies
 
+    // Basic
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     // inner modules
     implementation project(':cache')
     implementation project(':remote')
@@ -26,7 +29,6 @@ dependencies {
     implementation appModuleDependencies.room
     implementation appModuleDependencies.roomKtx
     implementation appModuleDependencies.roomRx
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt appModuleDependencies.roomAnnotation
 
     // navigation component

@@ -1,14 +1,12 @@
 package com.skfo763.presentation
 
 import androidx.lifecycle.MutableLiveData
-import com.skfo763.presentation.mapper.ViewMapper
 import com.skfo763.presentation.resource.Resource
 import com.skfo763.presentation.resource.ResourceState
 import io.reactivex.subscribers.DisposableSubscriber
 
 abstract class DataSubscriber<V, D>(
-    private val liveData: MutableLiveData<Resource<List<V>>>,
-    private val mapper: ViewMapper
+    private val liveData: MutableLiveData<Resource<List<V>>>
 ): DisposableSubscriber<List<D>>() {
 
     abstract val mapFunction: (D) -> (V)

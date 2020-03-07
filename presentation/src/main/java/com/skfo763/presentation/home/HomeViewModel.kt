@@ -27,7 +27,7 @@ open class HomeViewModel @Inject internal constructor(
     fun fetchAllBaseInfo() {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
         return getAllBaseInfo.execute(
-            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData) {
                 override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
                     get() = { mapper.mapBaseModelIntoHomeData(it) }
             }, null)
@@ -36,7 +36,7 @@ open class HomeViewModel @Inject internal constructor(
     fun searchByRegion(region: String) {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
         return searchRegionInfo.execute(
-            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData) {
                 override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
                     get() = { mapper.mapBaseModelIntoHomeData(it) }
             }, region)
@@ -45,7 +45,7 @@ open class HomeViewModel @Inject internal constructor(
     fun searchByStatus(status: Boolean) {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
         return searchStatusInfo.execute(
-            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData) {
             override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
                 get() = { mapper.mapBaseModelIntoHomeData(it) }
         }, status)

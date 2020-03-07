@@ -33,9 +33,6 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
-    // Basic
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
     // android & kotlin
     implementation commonDependencies.kotlin
     implementation commonDependencies.appCompat

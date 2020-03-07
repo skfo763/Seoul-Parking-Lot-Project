@@ -11,5 +11,9 @@
         android:title="@string/menu_main_bnv_map"
         android:icon="@drawable/ic_location_on_black_24dp"
         app:showAsAction="ifRoom"/>
-
+    <item
+        android:id="@+id/cacheFragment"
+        android:title="@string/menu_main_bnv_cache"
+        android:icon="@drawable/ic_stars_black_24dp"
+        app:showAsAction="ifRoom"/>
 </menu>

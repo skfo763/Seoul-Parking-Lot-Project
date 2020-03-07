@@ -10,11 +10,11 @@ import javax.inject.Inject
 
 class GetCacheBaseInfo @Inject constructor(
     private val repository: ParkingLotRepository,
-    private val executor: ThreadExecutor,
-    private val uiThread: PostExecutionThread
-): FlowableUseCase<List<ParkingLotBaseInfoModel>, String>(executor, uiThread) {
+    executor: ThreadExecutor,
+    uiThread: PostExecutionThread
+): FlowableUseCase<List<ParkingLotBaseInfoModel>, Void?>(executor, uiThread) {
 
-    override fun buildUseCaseObservable(param: String): Flowable<List<ParkingLotBaseInfoModel>> {
+    override fun buildUseCaseObservable(param: Void?): Flowable<List<ParkingLotBaseInfoModel>> {
         return repository.loadAllBaseInfoDataFromCache()
     }
 }
