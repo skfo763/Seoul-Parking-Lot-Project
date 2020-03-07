@@ -3,8 +3,9 @@ package com.skfo763.remote.mapper
 import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
 import com.skfo763.remote.entites.ParkingLotEntity
+import javax.inject.Inject
 
-class ParkingLotRemoteMapper :
+class ParkingLotRemoteMapper @Inject constructor():
     RemoteMapper<ParkingLotEntity, ParkingLotBaseInfoEntity, ParkingLotSpecificInfoEntity> {
 
     override fun mappingToBaseInfo(type: ParkingLotEntity): ParkingLotBaseInfoEntity {

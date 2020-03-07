@@ -25,6 +25,7 @@ class ParkingLotRemoteImpl
 
     override fun getParkingLotBaseInfoEntity(): Flowable<List<ParkingLotBaseInfoEntity>> {
         return api.getParkingLotData()
+            .flatMap { Flowable.just(it.wrapperData) }
             .flatMap <List<ParkingLotBaseInfoEntity>> {
                 val networkResult = it.networkResult
                 if(networkResult.code == NetworkErrorCode.NORMAL) {
@@ -37,6 +38,7 @@ class ParkingLotRemoteImpl
 
     override fun getBaseInfoWithRegion(region: String): Flowable<List<ParkingLotBaseInfoEntity>> {
         return api.getParkingLotData(region = region)
+            .flatMap { Flowable.just(it.wrapperData) }
             .flatMap <List<ParkingLotBaseInfoEntity>> {
                 val networkResult = it.networkResult
                 if(networkResult.code == NetworkErrorCode.NORMAL) {
@@ -49,6 +51,7 @@ class ParkingLotRemoteImpl
 
     override fun getBaseInfoWithHasInfo(hasInfo: Boolean): Flowable<List<ParkingLotBaseInfoEntity>> {
         return api.getParkingLotData(parkingCode = hasInfo.toString())
+            .flatMap { Flowable.just(it.wrapperData) }
             .flatMap <List<ParkingLotBaseInfoEntity>> {
                 val networkResult = it.networkResult
                 if(networkResult.code == NetworkErrorCode.NORMAL) {
@@ -61,6 +64,7 @@ class ParkingLotRemoteImpl
 
     override fun getParkingLotSpecificInfoEntity(): Flowable<List<ParkingLotSpecificInfoEntity>> {
         return api.getParkingLotData()
+            .flatMap { Flowable.just(it.wrapperData) }
             .flatMap <List<ParkingLotSpecificInfoEntity>> {
                 val networkResult = it.networkResult
                 if(networkResult.code == NetworkErrorCode.NORMAL) {
@@ -73,6 +77,7 @@ class ParkingLotRemoteImpl
 
     override fun getParkingLotSpecificInfoWithId(parkingId: String): Flowable<List<ParkingLotSpecificInfoEntity>> {
         return api.getParkingLotData(parkingCode = parkingId)
+            .flatMap { Flowable.just(it.wrapperData) }
             .flatMap <List<ParkingLotSpecificInfoEntity>> {
                 val networkResult = it.networkResult
                 if(networkResult.code == NetworkErrorCode.NORMAL) {

@@ -4,8 +4,9 @@ import com.skfo763.domain.model.ParkingLotBaseInfoModel
 import com.skfo763.presentation.model.CacheDataModel
 import com.skfo763.presentation.model.HomeDataModel
 import com.skfo763.presentation.model.MapDataModel
+import javax.inject.Inject
 
-class ViewMapper : Mapper {
+open class ViewMapper @Inject constructor(): Mapper {
 
     override fun mapBaseModelIntoHomeData(type: ParkingLotBaseInfoModel): HomeDataModel {
         return HomeDataModel(

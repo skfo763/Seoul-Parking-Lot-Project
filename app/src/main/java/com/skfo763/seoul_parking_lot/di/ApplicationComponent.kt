@@ -13,10 +13,11 @@ import javax.inject.Singleton
     AndroidInjectionModule::class,
     ApplicationModule::class,
     AppModule::class,
-    LocalCacheModule::class,
-    RemoteModule::class,
+    PresentationModule::class,
+    DomainModule::class,
     DataModule::class,
-    DomainModule::class
+    LocalCacheModule::class,
+    RemoteModule::class
 ])
 interface ApplicationComponent {
 

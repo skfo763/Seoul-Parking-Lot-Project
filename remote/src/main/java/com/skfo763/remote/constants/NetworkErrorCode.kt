@@ -21,7 +21,7 @@ INFO-200	해당하는 데이터가 없습니다.
  */
 enum class NetworkErrorCode {
 
-    @SerializedName("INFO_000") NORMAL,
+    @SerializedName("INFO-000") NORMAL,
 
     @SerializedName("ERROR-300") LACK_OF_ARGS,
 

@@ -24,24 +24,30 @@ open class HomeViewModel @Inject internal constructor(
     private val _allBaseInfoLiveData = MutableLiveData<Resource<List<HomeDataModel>>>()
     val allBaseINfoLiveData: LiveData<Resource<List<HomeDataModel>>> get() = _allBaseInfoLiveData
 
-    private val homeSubscriber = object
-        : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
-        override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
-            get() = { mapper.mapBaseModelIntoHomeData(it) }
-    }
-
     fun fetchAllBaseInfo() {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
-        return getAllBaseInfo.execute(homeSubscriber, null)
+        return getAllBaseInfo.execute(
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+                override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
+                    get() = { mapper.mapBaseModelIntoHomeData(it) }
+            }, null)
     }
 
     fun searchByRegion(region: String) {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
-        return searchRegionInfo.execute(homeSubscriber, region)
+        return searchRegionInfo.execute(
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+                override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
+                    get() = { mapper.mapBaseModelIntoHomeData(it) }
+            }, region)
     }
 
     fun searchByStatus(status: Boolean) {
         _allBaseInfoLiveData.postValue(Resource(ResourceState.LOADING))
-        return searchStatusInfo.execute(homeSubscriber, status)
+        return searchStatusInfo.execute(
+            object : DataSubscriber<HomeDataModel, ParkingLotBaseInfoModel>(_allBaseInfoLiveData, mapper) {
+            override val mapFunction: (ParkingLotBaseInfoModel) -> HomeDataModel
+                get() = { mapper.mapBaseModelIntoHomeData(it) }
+        }, status)
     }
 }

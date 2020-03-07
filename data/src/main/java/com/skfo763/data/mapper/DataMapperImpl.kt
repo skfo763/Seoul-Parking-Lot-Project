@@ -3,8 +3,9 @@ package com.skfo763.data.mapper
 import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
 import com.skfo763.domain.model.*
+import javax.inject.Inject
 
-class DataMapperImpl : DataMapper {
+class DataMapperImpl @Inject constructor() : DataMapper {
     override fun mapBaseModelToEntity(type: ParkingLotBaseInfoModel): ParkingLotBaseInfoEntity {
         return ParkingLotBaseInfoEntity(
             type.parkingCode,
