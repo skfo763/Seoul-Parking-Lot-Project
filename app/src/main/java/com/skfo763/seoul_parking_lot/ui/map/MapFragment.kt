@@ -4,57 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
+import android.widget.Toast
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import com.skfo763.presentation.ViewModelFactory
 import com.skfo763.presentation.map.MapViewModel
 import com.skfo763.presentation.model.MapDataModel
 import com.skfo763.presentation.resource.ResourceState
+import com.skfo763.seoul_parking_lot.BR
 import com.skfo763.seoul_parking_lot.R
+import com.skfo763.seoul_parking_lot.base.BaseFragment
 import com.skfo763.seoul_parking_lot.databinding.FragmentMapBinding
 import dagger.android.support.AndroidSupportInjection
-import javax.inject.Inject
+import net.daum.mf.map.api.MapView
 
-class MapFragment : Fragment() {
+class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), MapContract.View {
 
     companion object {
         private const val TAG = "MapFragment"
+        private const val NO_DATA_ALERT = "주변에 등록된 주차장 정보가 없어요 :("
     }
 
-    @Inject lateinit var viewModelFactory: ViewModelFactory
-    @Inject lateinit var mapViewModel: MapViewModel
-    private lateinit var mapPresenter: MapViewPresenter
+    private lateinit var mapPresenter: MapContract.Presenter
+    override fun layoutResId(): Int = R.layout.fragment_map
+    override fun getViewModel(): Class<MapViewModel> = MapViewModel::class.java
+    override var mapView: MapView? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding =
-            DataBindingUtil.inflate<FragmentMapBinding>(inflater, R.layout.fragment_map, container, false)
-        executeInjection()
-        setMapView(binding)
-        return binding.root
+    override fun executeInject() {
+        AndroidSupportInjection.inject(this)
+        this.mapView = MapView(requireContext())
+        mapPresenter = MapViewPresenter(this)
     }
 
-    override fun onStart() {
-        super.onStart()
-        mapViewModel.nearestInfo.observe(this, Observer { data ->
+    override fun initObserver() {
+        viewModel.nearestInfo.observe(this, Observer { data ->
             data?.let { handleDataState(it.resState, it.message, it.data) }
         })
     }
 
-    private fun executeInjection() {
-        AndroidSupportInjection.inject(this)
-        mapViewModel = ViewModelProvider(this, viewModelFactory).get(MapViewModel::class.java)
-        mapPresenter = MapViewPresenter(requireContext())
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        val view = super.onCreateView(inflater, container, savedInstanceState)
+        setMapView(binding)
+        return view
     }
 
     private fun setMapView(binding: FragmentMapBinding) {
         val mapViewController = binding.mvMapFragMapView
-        mapViewController.addView(mapPresenter.mapView)
+        mapViewController.addView(mapView)
     }
 
     private fun handleDataState(
@@ -62,6 +57,21 @@ class MapFragment : Fragment() {
         message: String?,
         data: List<MapDataModel>?
     ) {
+        binding.setVariable(BR.isLoading, resState == ResourceState.LOADING)
+        when(resState) {
+            ResourceState.LOADING -> {}
+            ResourceState.SUCCESS -> {
+                data?.let { mapPresenter.setMarker(it) } ?: run {
+                    Toast.makeText(requireContext(), NO_DATA_ALERT, Toast.LENGTH_SHORT).show()
+                }
+            }
+            ResourceState.ERROR -> {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
+    override fun loadData() {
+        viewModel.fetchNearestInfo("송파")
     }
 }

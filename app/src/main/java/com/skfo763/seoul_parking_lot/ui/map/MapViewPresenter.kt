@@ -1,29 +1,34 @@
 package com.skfo763.seoul_parking_lot.ui.map
 
-import android.content.Context
+import android.util.Log
 import com.skfo763.presentation.model.MapDataModel
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 
-class MapViewPresenter(context: Context)
-    : MapView.MapViewEventListener, MapView.POIItemEventListener {
+class MapViewPresenter(val view: MapContract.View)
+    : MapContract.Presenter, MapView.MapViewEventListener, MapView.POIItemEventListener {
 
     companion object {
+        private const val TAG = "MapViewPresenter"
         private const val DEFAULT_ZOOM_LEVEL = 4
     }
 
-    private val _mapView = MapView(context)
-    val mapView: MapView get() = _mapView
-
     init {
-        _mapView.setMapViewEventListener(this)
-        _mapView.setPOIItemEventListener(this)
+        view.mapView?.setMapViewEventListener(this)
+        view.mapView?.setPOIItemEventListener(this)
+        setMapCenterPoint(37.516244, 127.112099)
+    }
+
+    override fun setMarker(data: List<MapDataModel>) {
+        data.forEach {
+            setParkingLotMarker(it)
+        }
     }
 
     private fun setMapCenterPoint(lat: Double, lng: Double) {
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lng), true)
-        mapView.setZoomLevel(DEFAULT_ZOOM_LEVEL, true)
+        view.mapView?.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(lat, lng), true)
+        view.mapView?.setZoomLevel(DEFAULT_ZOOM_LEVEL, true)
     }
 
     private fun setParkingLotMarker(data: MapDataModel) {
@@ -34,62 +39,41 @@ class MapViewPresenter(context: Context)
             markerType = MapPOIItem.MarkerType.BluePin
             selectedMarkerType = MapPOIItem.MarkerType.RedPin
         }
-        _mapView.addPOIItem(marker)
+        view.mapView?.addPOIItem(marker)
     }
 
-    override fun onMapViewDoubleTapped(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onMapViewDoubleTapped(mapView: MapView?, mapPoint: MapPoint?) {
+        
     }
 
-    override fun onMapViewInitialized(p0: MapView?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onMapViewInitialized(mapView: MapView?) {
+        Log.d(TAG, "map is initialized")
+        view.loadData()
     }
 
-    override fun onMapViewDragStarted(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewDragStarted(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewMoveFinished(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewMoveFinished(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewCenterPointMoved(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewCenterPointMoved(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewDragEnded(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewDragEnded(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewSingleTapped(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewSingleTapped(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewZoomLevelChanged(p0: MapView?, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewZoomLevelChanged(mapView: MapView?, mapPoint: Int) {}
 
-    override fun onMapViewLongPressed(p0: MapView?, p1: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMapViewLongPressed(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onCalloutBalloonOfPOIItemTouched(p0: MapView?, p1: MapPOIItem?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, mapPoint: MapPOIItem?) {}
 
     override fun onCalloutBalloonOfPOIItemTouched(
-        p0: MapView?,
-        p1: MapPOIItem?,
+        mapView: MapView?,
+        mapPoint: MapPOIItem?,
         p2: MapPOIItem.CalloutBalloonButtonType?
-    ) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    ) {}
 
-    override fun onDraggablePOIItemMoved(p0: MapView?, p1: MapPOIItem?, p2: MapPoint?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onDraggablePOIItemMoved(mapView: MapView?, mapPoint: MapPOIItem?, p2: MapPoint?) {}
 
-    override fun onPOIItemSelected(p0: MapView?, p1: MapPOIItem?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onPOIItemSelected(mapView: MapView?, mapPoint: MapPOIItem?) {}
 }

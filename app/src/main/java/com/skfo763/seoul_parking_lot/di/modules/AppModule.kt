@@ -13,16 +13,6 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class AppModule {
 
-   /* @Module
-    companion object {
-
-        @Provides
-        @JvmStatic
-        fun providesMapPresenter(): MapViewPresenter {
-            return MapViewPresenter()
-        }
-    } */
-
     @Binds
     abstract fun bindPostExecutionThread(uiThread: UiMainThread): PostExecutionThread
 
