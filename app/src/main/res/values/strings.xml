@@ -1,6 +1,16 @@
 <resources>
     <string name="app_name">Seoul-Parking-Lot</string>
+    <string name="dialog_confirm">확인</string>
+    <string name="dialog_decline">취소</string>
+
+    <!-- MainActivity -->
     <string name="menu_main_bnv_home">홈</string>
     <string name="menu_main_bnv_map">지도</string>
     <string name="menu_main_bnv_cache">즐겨찾기</string>
+
+    <!--MapFragment-->
+    <string name="map_frag_permission_text">위치정보 사용권한이 없으면 주변 주차장 찾기 서비스를 이용할 수 없어요.</string>
+    <string name="map_frag_permission_button">위치정보 허용하고 내 주변 주차장 찾기</string>
+    <string name="map_frag_dialog_gps_on_title">위치 서비스 활성화</string>
+    <string name="map_frag_dialog_gps_on_message">내 주변 주차장 서비스를 불러오기 위해 GPS를 사용합니다.</string>
 </resources>

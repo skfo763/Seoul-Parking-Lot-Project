@@ -1,6 +1,6 @@
 package com.skfo763.seoul_parking_lot.di.modules
 
-import com.skfo763.data.repository.ParkingLotRemote
+import com.skfo763.data.repository.parkinglot.ParkingLotRemote
 import com.skfo763.remote.services.ParkingLotApi
 import com.skfo763.remote.services.ParkingLotService
 import com.skfo763.remote.ParkingLotRemoteImpl

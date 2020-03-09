@@ -13,7 +13,6 @@ class GetAllBaseMapInfo @Inject constructor(
     executor: ThreadExecutor,
     uiThread: PostExecutionThread
 ): FlowableUseCase<List<ParkingLotBaseInfoModel>, Void?>(executor, uiThread) {
-
     override fun buildUseCaseObservable(param: Void?): Flowable<List<ParkingLotBaseInfoModel>> {
         return repository.loadAllBaseInfoData()
     }

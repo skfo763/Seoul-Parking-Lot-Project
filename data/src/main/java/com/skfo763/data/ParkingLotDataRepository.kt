@@ -1,16 +1,17 @@
 package com.skfo763.data
 
 import com.skfo763.data.mapper.DataMapperImpl
-import com.skfo763.data.source.ParkingLotDataSourceFactory
+import com.skfo763.data.source.parkinglot.ParkingLotDataSourceFactory
 import com.skfo763.domain.ParkingLotRepository
 import com.skfo763.domain.model.*
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import javax.inject.Inject
 
-class ParkingLotDataRepository
-@Inject constructor(private val factory: ParkingLotDataSourceFactory,
-                    private val mapper: DataMapperImpl): ParkingLotRepository {
+class ParkingLotDataRepository @Inject constructor(
+    private val factory: ParkingLotDataSourceFactory,
+    private val mapper: DataMapperImpl
+): ParkingLotRepository {
     override fun clearCache(): Completable {
         return factory.getCacheDataSource().clearParkingLotData()
     }

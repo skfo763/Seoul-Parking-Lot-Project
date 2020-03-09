@@ -30,8 +30,9 @@ android {
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
-    // Basic
+    // Base
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
 
     // android & kotlin
     implementation commonDependencies.kotlin

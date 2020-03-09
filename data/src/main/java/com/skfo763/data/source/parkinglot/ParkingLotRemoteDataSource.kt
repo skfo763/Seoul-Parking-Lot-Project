@@ -1,52 +1,51 @@
-package com.skfo763.data.source
+package com.skfo763.data.source.parkinglot
 
 import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
-import com.skfo763.data.repository.ParkingLotCache
-import com.skfo763.data.repository.ParkingLotDataSource
+import com.skfo763.data.repository.parkinglot.ParkingLotDataSource
+import com.skfo763.data.repository.parkinglot.ParkingLotRemote
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
-open class ParkingLotCacheDataSource
-@Inject constructor(private val cache: ParkingLotCache) : ParkingLotDataSource {
+open class ParkingLotRemoteDataSource
+@Inject constructor(private val remote: ParkingLotRemote) :
+    ParkingLotDataSource {
     override fun clearParkingLotData(): Completable {
-        return cache.clearCaches()
+        throw UnsupportedOperationException()
     }
 
     override fun saveParkingLotData(data: ParkingLotBaseInfoEntity): Completable {
-        return cache.saveParkingLotInfoToCache(data)
-            .doOnComplete {
-                cache.setLastCacheTime(System.currentTimeMillis())
-            }
+        throw UnsupportedOperationException()
     }
 
     override fun getParkingLotBaseData(): Flowable<List<ParkingLotBaseInfoEntity>> {
-        return cache.getAllCaches()
+        return remote.getParkingLotBaseInfoEntity()
     }
 
     override fun getParkingLotBaseDataWithRegion(region: String): Flowable<List<ParkingLotBaseInfoEntity>> {
-        return cache.getCacheDataWithRegion(region)
+        return remote.getBaseInfoWithRegion(region)
     }
 
     override fun getParkingLotBaseDataWithStatus(queueStatus: Boolean): Flowable<List<ParkingLotBaseInfoEntity>> {
-        throw UnsupportedOperationException()
+        return remote.getBaseInfoWithHasInfo(queueStatus)
     }
 
     override fun getCacheDataWithChargeInfo(isCharge: String): Flowable<List<ParkingLotBaseInfoEntity>> {
-        return cache.getCacheDataWithChargeInfo(isCharge)
+        throw java.lang.UnsupportedOperationException()
     }
 
     override fun getParkingLotSpecificData(): Flowable<List<ParkingLotSpecificInfoEntity>> {
-        throw UnsupportedOperationException()
+        return remote.getParkingLotSpecificInfoEntity()
     }
 
     override fun getParkingLotSpecificDataWithId(code: String): Flowable<List<ParkingLotSpecificInfoEntity>> {
-        throw UnsupportedOperationException()    }
+        return remote.getParkingLotSpecificInfoWithId(code)
+    }
 
     override fun isCached(): Single<Boolean> {
-        return cache.isCached()
+        throw UnsupportedOperationException()
     }
 
 }

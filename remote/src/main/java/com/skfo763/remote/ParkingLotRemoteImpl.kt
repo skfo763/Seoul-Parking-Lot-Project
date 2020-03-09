@@ -2,7 +2,7 @@ package com.skfo763.remote
 
 import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.entities.ParkingLotSpecificInfoEntity
-import com.skfo763.data.repository.ParkingLotRemote
+import com.skfo763.data.repository.parkinglot.ParkingLotRemote
 import com.skfo763.remote.constants.NetworkErrorCode
 import com.skfo763.remote.entites.ParkingLotEntity
 import com.skfo763.remote.mapper.ParkingLotRemoteMapper

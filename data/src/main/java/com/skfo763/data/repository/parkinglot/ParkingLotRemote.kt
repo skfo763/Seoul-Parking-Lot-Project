@@ -1,4 +1,4 @@
-package com.skfo763.data.repository
+package com.skfo763.data.repository.parkinglot
 
 import com.skfo763.data.entities.ParkingLotBaseInfoEntity
 import com.skfo763.data.entities.ParkingLotSpecificInfoEntity

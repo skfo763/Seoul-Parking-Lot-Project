@@ -5,8 +5,9 @@ apply plugin: 'kotlin-kapt'
 dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
 
-    // basic
+    // base
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':core')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // dagger

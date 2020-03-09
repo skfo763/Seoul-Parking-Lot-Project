@@ -33,6 +33,9 @@ dependencies {
     def commonDependencies = rootProject.ext.commonDependencies
     def commonTestDependencies = rootProject.ext.commonTestDependencies
 
+    // base
+    implementation project(':core')
+
     // android & kotlin
     implementation commonDependencies.kotlin
     implementation commonDependencies.appCompat

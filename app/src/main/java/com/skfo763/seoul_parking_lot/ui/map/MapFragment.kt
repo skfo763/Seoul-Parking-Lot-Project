@@ -1,6 +1,10 @@
 package com.skfo763.seoul_parking_lot.ui.map
 
+import android.app.AlertDialog
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,69 +13,121 @@ import androidx.lifecycle.Observer
 import com.skfo763.presentation.map.MapViewModel
 import com.skfo763.presentation.model.MapDataModel
 import com.skfo763.presentation.resource.ResourceState
-import com.skfo763.seoul_parking_lot.BR
 import com.skfo763.seoul_parking_lot.R
 import com.skfo763.seoul_parking_lot.base.BaseFragment
 import com.skfo763.seoul_parking_lot.databinding.FragmentMapBinding
+import com.skfo763.seoul_parking_lot.utils.GpsManager
+import com.skfo763.seoul_parking_lot.utils.PermissionProcessor
 import dagger.android.support.AndroidSupportInjection
-import net.daum.mf.map.api.MapView
 
-class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(), MapContract.View {
+private const val PERMISSION_REQUEST_CODE = 1004
+private const val GPS_REQUEST_CODE = 255
+
+class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
 
     companion object {
         private const val TAG = "MapFragment"
         private const val NO_DATA_ALERT = "주변에 등록된 주차장 정보가 없어요 :("
+        private const val UNDEFINED_ERR = "알 수 없는 에러로 데이터를 불러올 수 없습니다."
     }
 
-    private lateinit var mapPresenter: MapContract.Presenter
     override fun layoutResId(): Int = R.layout.fragment_map
     override fun getViewModel(): Class<MapViewModel> = MapViewModel::class.java
-    override var mapView: MapView? = null
 
     override fun executeInject() {
         AndroidSupportInjection.inject(this)
-        this.mapView = MapView(requireContext())
-        mapPresenter = MapViewPresenter(this)
     }
 
-    override fun initObserver() {
-        viewModel.nearestInfo.observe(this, Observer { data ->
-            data?.let { handleDataState(it.resState, it.message, it.data) }
-        })
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        setMapView(binding)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val view= super.onCreateView(inflater, container, savedInstanceState)
+        setCurrentLocationToMap()
         return view
     }
 
-    private fun setMapView(binding: FragmentMapBinding) {
-        val mapViewController = binding.mvMapFragMapView
-        mapViewController.addView(mapView)
+    override fun onStart() {
+        super.onStart()
+        viewModel.setMapForeground()
     }
 
-    private fun handleDataState(
-        resState: ResourceState,
-        message: String?,
-        data: List<MapDataModel>?
-    ) {
-        binding.setVariable(BR.isLoading, resState == ResourceState.LOADING)
+    override fun initObserver() {
+        viewModel.nearestInfo.observe(this.viewLifecycleOwner, Observer { data ->
+            data?.let { handleDataState(it.resState, it.message, it.data) }
+        })
+
+        viewModel.targetPermissions.observe(this.viewLifecycleOwner, Observer { permissions ->
+            if(permissions.isNotEmpty()) {
+                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                intent.data = Uri.fromParts("package", requireActivity().packageName, null)
+                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
+            }
+        })
+    }
+
+    private fun handleDataState(resState: ResourceState, message: String?, data: List<MapDataModel>?) {
         when(resState) {
-            ResourceState.LOADING -> {}
+            ResourceState.LOADING -> return
             ResourceState.SUCCESS -> {
-                data?.let { mapPresenter.setMarker(it) } ?: run {
+                if(data.isNullOrEmpty())
                     Toast.makeText(requireContext(), NO_DATA_ALERT, Toast.LENGTH_SHORT).show()
-                }
             }
-            ResourceState.ERROR -> {
-                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-            }
+            ResourceState.ERROR ->
+                Toast.makeText(requireContext(), message ?: UNDEFINED_ERR , Toast.LENGTH_SHORT).show()
         }
     }
 
-    override fun loadData() {
-        viewModel.fetchNearestInfo("송파")
+    private fun setCurrentLocationToMap() {
+        val gpsManager = GpsManager(requireContext())
+        gpsManager.requestLocationWithPermission({ location ->
+            viewModel.onAllPermissionGranted()
+            location?.let {
+                binding.mvMapFragMapView.setMapCenterPoint(it.latitude, it.longitude)
+            } ?: kotlin.run {
+                requestGpsService()
+            }
+        }) { deniedPermission ->
+            requestPermissions(deniedPermission.toTypedArray(), PERMISSION_REQUEST_CODE)
+        }
+    }
+
+    private fun requestGpsService() {
+        AlertDialog.Builder(requireContext())
+            .setTitle(getString(R.string.map_frag_dialog_gps_on_title))
+            .setMessage(getString(R.string.map_frag_dialog_gps_on_message))
+            .setCancelable(false)
+            .setPositiveButton(R.string.dialog_confirm) { _, _ ->
+                Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).apply {
+                    startActivityForResult(this, GPS_REQUEST_CODE)
+                }
+            }.create()
+            .show()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode != PERMISSION_REQUEST_CODE) return
+
+        val deniedPermission = PermissionProcessor.checkPermissionResult(permissions, grantResults)
+        if(deniedPermission.isEmpty()) {
+            viewModel.onAllPermissionGranted()
+            setCurrentLocationToMap()
+        } else {
+            viewModel.setViewStateWithDeniedPermission(deniedPermission)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            GPS_REQUEST_CODE,
+            PERMISSION_REQUEST_CODE -> setCurrentLocationToMap()
+        }
     }
 }

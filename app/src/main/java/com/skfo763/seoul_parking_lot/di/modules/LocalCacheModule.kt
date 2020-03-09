@@ -2,10 +2,12 @@ package com.skfo763.seoul_parking_lot.di.modules
 
 import android.app.Application
 import androidx.room.Room
+import com.skfo763.cache.CommonCacheImpl
 import com.skfo763.cache.DBConstants
 import com.skfo763.cache.ParkingLotCacheImpl
 import com.skfo763.cache.ParkingLotDatabase
-import com.skfo763.data.repository.ParkingLotCache
+import com.skfo763.data.repository.common.CommonCache
+import com.skfo763.data.repository.parkinglot.ParkingLotCache
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -29,4 +31,7 @@ abstract class LocalCacheModule {
 
     @Binds
     abstract fun bindParkingLotCache(cacheImpl: ParkingLotCacheImpl): ParkingLotCache
+
+    @Binds
+    abstract fun bindCommonCache(cacheImpl: CommonCacheImpl): CommonCache
 }

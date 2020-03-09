@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomMapView">
+        <attr name="defaultZoomLevel" format="integer"/>
+        <attr name="defaultLatitude" format="float"/>
+        <attr name="defaultLongitude" format="float"/>
+    </declare-styleable>
+</resources>

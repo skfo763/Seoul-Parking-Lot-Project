@@ -15,4 +15,4 @@ gradle.ext {
     set('targetSdk', 29)
     set('compileSdk', 29)
 }
-
+include ':core'
