@@ -9,15 +9,17 @@ class MapEventListener(private val mapFragment: MapFragment):
 
     override fun onMapViewDoubleTapped(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewInitialized(mapView: MapView?) {
-
-    }
+    override fun onMapViewInitialized(mapView: MapView?) {}
 
     override fun onMapViewDragStarted(mapView: MapView?, mapPoint: MapPoint?) {}
 
     override fun onMapViewMoveFinished(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewCenterPointMoved(mapView: MapView?, mapPoint: MapPoint?) {}
+    override fun onMapViewCenterPointMoved(mapView: MapView?, mapPoint: MapPoint?) {
+        mapPoint?.let {
+            mapFragment.setMarkerBasedOnCenterPoint(it)
+        }
+    }
 
     override fun onMapViewDragEnded(mapView: MapView?, mapPoint: MapPoint?) {}
 

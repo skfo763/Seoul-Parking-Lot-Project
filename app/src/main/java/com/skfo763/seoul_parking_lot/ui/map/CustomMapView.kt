@@ -42,6 +42,11 @@ class CustomMapView : FrameLayout {
         } finally { typedArray.recycle() }
     }
 
+    fun setListener(listener: MapEventListener) {
+        this.mapView.setMapViewEventListener(listener)
+        this.mapView.setPOIItemEventListener(listener)
+    }
+
     fun setMarker(data: List<MapDataModel>) {
         data.forEach {
             setParkingLotMarker(it)

@@ -83,6 +83,7 @@ open class MapViewModel @Inject internal constructor(
 
     fun onAllPermissionGranted() {
         setMapForegroundState(false)
+        _showBarrier.postValue(false)
         _permissionGranted.postValue(true)
     }
 

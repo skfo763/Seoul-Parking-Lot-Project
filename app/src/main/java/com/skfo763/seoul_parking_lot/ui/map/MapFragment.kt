@@ -12,17 +12,21 @@ import androidx.lifecycle.Observer
 import com.skfo763.presentation.map.MapViewModel
 import com.skfo763.presentation.model.MapDataModel
 import com.skfo763.presentation.resource.ResourceState
+import com.skfo763.seoul_parking_lot.BuildConfig
 import com.skfo763.seoul_parking_lot.R
 import com.skfo763.seoul_parking_lot.base.BaseFragment
 import com.skfo763.seoul_parking_lot.databinding.FragmentMapBinding
 import com.skfo763.seoul_parking_lot.utils.GpsManager
 import com.skfo763.seoul_parking_lot.utils.PermissionProcessor
 import dagger.android.support.AndroidSupportInjection
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapReverseGeoCoder
 
 private const val PERMISSION_REQUEST_CODE = 1004
 private const val GPS_REQUEST_CODE = 255
 
-class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
+class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
+    MapReverseGeoCoder.ReverseGeoCodingResultListener {
 
     companion object {
         private const val TAG = "MapFragment"
@@ -44,6 +48,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
     ): View? {
         val view= super.onCreateView(inflater, container, savedInstanceState)
         setCurrentLocationToMap()
+        binding.mvMapFragMapView.setListener(MapEventListener(this))
         return view
     }
 
@@ -111,6 +116,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
         }
     }
 
+    fun setMarkerBasedOnCenterPoint(mapPoint: MapPoint) {
+        val reverseGeoCoder = MapReverseGeoCoder(BuildConfig.API_KEY,
+            mapPoint, this, requireActivity())
+        reverseGeoCoder.startFindingAddress()
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -135,5 +146,13 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
             GPS_REQUEST_CODE,
             PERMISSION_REQUEST_CODE -> setCurrentLocationToMap()
         }
+    }
+
+    override fun onReverseGeoCoderFailedToFindAddress(p0: MapReverseGeoCoder?) {
+
+    }
+
+    override fun onReverseGeoCoderFoundAddress(p0: MapReverseGeoCoder?, p1: String?) {
+        p1?.let { viewModel.fetchNearestInfo(it) }
     }
 }
