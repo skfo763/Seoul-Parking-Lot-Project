@@ -1,10 +1,9 @@
 package com.skfo763.data.repository.common
 
-import com.skfo763.core.PermissionState
 import io.reactivex.Single
 
 interface CommonCache {
-    fun getLocationPermissionState(): Single<PermissionState.Type>
+    fun isLocationPermissionRuntimeCheck(): Single<Boolean>
 
-    fun setLocationPermissionState(state: PermissionState.Type)
+    fun setLocationPermissionCheckState(state: Boolean)
 }

@@ -2,7 +2,6 @@ package com.skfo763.cache.sharedprefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.skfo763.core.PermissionState
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -25,10 +24,7 @@ open class SharedPreferenceHelper @Inject constructor(context: Context) {
         get() = bufferPref.getLong(PREF_KEY_LAST_CACHE, 0)
         set(lastCache) = bufferPref.edit().putLong(PREF_KEY_LAST_CACHE, lastCache).apply()
 
-    var locationPermissionState: PermissionState.Type
-        get() = PermissionState.getState(
-            bufferPref.getInt(PREF_KEY_LOCATION_PERMISSION_STATE, PermissionState.Type.DENIED_NEVER_SHOW.type)
-        )
-        set(permissionState) =
-            bufferPref.edit().putInt(PREF_KEY_LOCATION_PERMISSION_STATE, permissionState.type).apply()
+    var isLocationPermissionCheckInRuntime: Boolean
+        get() = bufferPref.getBoolean(PREF_KEY_LOCATION_PERMISSION_STATE, true)
+        set(state ) = bufferPref.edit().putBoolean(PREF_KEY_LOCATION_PERMISSION_STATE, state).apply()
 }

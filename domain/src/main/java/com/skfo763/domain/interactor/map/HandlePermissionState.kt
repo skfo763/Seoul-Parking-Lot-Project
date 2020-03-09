@@ -1,6 +1,5 @@
 package com.skfo763.domain.interactor.map
 
-import com.skfo763.core.PermissionState
 import com.skfo763.domain.CommonRepository
 import com.skfo763.domain.executor.PostExecutionThread
 import com.skfo763.domain.executor.ThreadExecutor
@@ -16,16 +15,16 @@ class HandlePermissionState @Inject constructor(
 ) {
     private val compositeDisposable = CompositeDisposable()
 
-    fun getBackgroundViewState(consumer: Consumer<PermissionState.Type>) {
-        val observer = repository.getLocationPermissionState()
+    fun getBackgroundViewState(consumer: Consumer<Boolean>) {
+        val observer = repository.getForegroundBarrierState()
             .observeOn(Schedulers.from(executor))
             .subscribeOn(uiThread.scheduler)
 
         compositeDisposable.add(observer.subscribe(consumer))
     }
 
-    fun setLocationPermissionState(state: PermissionState.Type) {
-        repository.setLocationPermissionState(state)
+    fun setMapForegroundState(state: Boolean) {
+        repository.setForegroundBarrierState(state)
     }
 
     fun clearAll() {

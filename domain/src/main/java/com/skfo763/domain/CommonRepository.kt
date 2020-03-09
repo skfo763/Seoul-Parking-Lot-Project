@@ -1,10 +1,9 @@
 package com.skfo763.domain
 
-import com.skfo763.core.PermissionState
 import io.reactivex.Single
 
 interface CommonRepository {
-    fun getLocationPermissionState(): Single<PermissionState.Type>
+    fun getForegroundBarrierState(): Single<Boolean>
 
-    fun setLocationPermissionState(state: PermissionState.Type)
+    fun setForegroundBarrierState(state: Boolean)
 }

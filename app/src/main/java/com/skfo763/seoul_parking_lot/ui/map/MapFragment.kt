@@ -2,7 +2,6 @@ package com.skfo763.seoul_parking_lot.ui.map
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -59,11 +58,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
         })
 
         viewModel.targetPermissions.observe(this.viewLifecycleOwner, Observer { permissions ->
-            if(permissions.isNotEmpty()) {
-                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                intent.data = Uri.fromParts("package", requireActivity().packageName, null)
-                startActivityForResult(intent, PERMISSION_REQUEST_CODE)
-            }
+            requestTargetPermissions(permissions)
         })
     }
 
@@ -89,7 +84,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
                 requestGpsService()
             }
         }) { deniedPermission ->
-            requestPermissions(deniedPermission.toTypedArray(), PERMISSION_REQUEST_CODE)
+            viewModel.setViewStateWithDeniedPermission(deniedPermission)
         }
     }
 
@@ -106,6 +101,16 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
             .show()
     }
 
+    private fun requestTargetPermissions(permissions: List<String>) {
+        if(permissions.isEmpty()) {
+            /*val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+            intent.data = Uri.fromParts("package", requireActivity().packageName, null)
+            startActivityForResult(intent, PERMISSION_REQUEST_CODE)   */
+        } else {
+            requestPermissions(permissions.toTypedArray(), PERMISSION_REQUEST_CODE)
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -119,6 +124,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>() {
             viewModel.onAllPermissionGranted()
             setCurrentLocationToMap()
         } else {
+            viewModel.setMapForegroundState(false)
             viewModel.setViewStateWithDeniedPermission(deniedPermission)
         }
     }
