@@ -7,6 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subscribers.DisposableSubscriber
+import java.util.concurrent.TimeUnit
 
 abstract class FlowableUseCase<T, in Params>(
     private val threadExecutor: ThreadExecutor,
@@ -18,6 +19,7 @@ abstract class FlowableUseCase<T, in Params>(
 
     open fun execute(observer: DisposableSubscriber<T>, params: Params) {
         val observable = this.buildUseCaseObservable(params)
+            .throttleFirst(200L, TimeUnit.MILLISECONDS)
             .subscribeOn(Schedulers.from(threadExecutor))
             .observeOn(postExecutionThread.scheduler) as Flowable<T>
         addDisposable(observable.subscribeWith(observer))

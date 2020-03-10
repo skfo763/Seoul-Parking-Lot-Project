@@ -7,9 +7,15 @@ import net.daum.mf.map.api.MapView
 class MapEventListener(private val mapFragment: MapFragment):
     MapView.MapViewEventListener, MapView.POIItemEventListener {
 
+    companion object {
+        private const val MAP_TOUCH_DISTANCE = 500L
+    }
+
     override fun onMapViewDoubleTapped(mapView: MapView?, mapPoint: MapPoint?) {}
 
-    override fun onMapViewInitialized(mapView: MapView?) {}
+    override fun onMapViewInitialized(mapView: MapView?) {
+        mapFragment.setMarkerBasedOnCenterPoint(mapView?.mapCenterPoint)
+    }
 
     override fun onMapViewDragStarted(mapView: MapView?, mapPoint: MapPoint?) {}
 

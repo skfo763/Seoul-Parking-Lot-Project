@@ -2,6 +2,7 @@ package com.skfo763.seoul_parking_lot.ui.map
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
@@ -36,6 +37,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
 
     override fun layoutResId(): Int = R.layout.fragment_map
     override fun getViewModel(): Class<MapViewModel> = MapViewModel::class.java
+    private val mapEventListener = MapEventListener(this)
 
     override fun executeInject() {
         AndroidSupportInjection.inject(this)
@@ -47,8 +49,8 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
         savedInstanceState: Bundle?
     ): View? {
         val view= super.onCreateView(inflater, container, savedInstanceState)
+        binding.mvMapFragMapView.setListener(mapEventListener)
         setCurrentLocationToMap()
-        binding.mvMapFragMapView.setListener(MapEventListener(this))
         return view
     }
 
@@ -85,6 +87,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
             viewModel.onAllPermissionGranted()
             location?.let {
                 binding.mvMapFragMapView.setMapCenterPoint(it.latitude, it.longitude)
+                requestApiWithAddress(it.latitude, it.longitude)
             } ?: kotlin.run {
                 requestGpsService()
             }
@@ -116,10 +119,22 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
         }
     }
 
-    fun setMarkerBasedOnCenterPoint(mapPoint: MapPoint) {
-        val reverseGeoCoder = MapReverseGeoCoder(BuildConfig.API_KEY,
-            mapPoint, this, requireActivity())
-        reverseGeoCoder.startFindingAddress()
+    fun setMarkerBasedOnCenterPoint(mapPoint: MapPoint? = null) {
+        MapReverseGeoCoder(BuildConfig.API_KEY, mapPoint, this, requireActivity())
+            .apply { startFindingAddress() }
+    }
+
+    private fun requestApiWithAddress(lat: Double, lng: Double) {
+        try {
+            val addrList = Geocoder(requireActivity()).getFromLocation(lat, lng, 5)
+            if(!addrList.isNullOrEmpty()) {
+                addrList[0].locality?.let {
+                    viewModel.fetchNearestInfo(it)
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -148,11 +163,12 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
         }
     }
 
-    override fun onReverseGeoCoderFailedToFindAddress(p0: MapReverseGeoCoder?) {
-
-    }
+    override fun onReverseGeoCoderFailedToFindAddress(p0: MapReverseGeoCoder?) {}
 
     override fun onReverseGeoCoderFoundAddress(p0: MapReverseGeoCoder?, p1: String?) {
-        p1?.let { viewModel.fetchNearestInfo(it) }
+        p1?.let {
+            val region = viewModel.getRegionName(p1) ?: return
+            viewModel.fetchNearestInfo(region)
+        }
     }
 }
