@@ -127,7 +127,7 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
 
     private fun requestApiWithAddress(lat: Double, lng: Double) {
         try {
-            val addrList = Geocoder(requireActivity()).getFromLocation(lat, lng, 5)
+            val addrList = Geocoder(requireContext()).getFromLocation(lat, lng, 5)
             if(!addrList.isNullOrEmpty()) {
                 addrList[0].locality?.let {
                     viewModel.fetchNearestInfo(it)
