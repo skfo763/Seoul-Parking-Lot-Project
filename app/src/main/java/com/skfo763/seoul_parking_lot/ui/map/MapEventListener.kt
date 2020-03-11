@@ -45,5 +45,9 @@ class MapEventListener(private val mapFragment: MapFragment):
 
     override fun onDraggablePOIItemMoved(mapView: MapView?, mapPoint: MapPOIItem?, p2: MapPoint?) {}
 
-    override fun onPOIItemSelected(mapView: MapView?, mapPoint: MapPOIItem?) {}
+    override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
+        poiItem?.let {
+            mapFragment.onMarkerItemSelected(it)
+        }
+    }
 }

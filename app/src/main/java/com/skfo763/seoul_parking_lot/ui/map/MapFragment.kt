@@ -20,6 +20,7 @@ import com.skfo763.seoul_parking_lot.databinding.FragmentMapBinding
 import com.skfo763.seoul_parking_lot.utils.GpsManager
 import com.skfo763.seoul_parking_lot.utils.PermissionProcessor
 import dagger.android.support.AndroidSupportInjection
+import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapReverseGeoCoder
 
@@ -135,6 +136,10 @@ class MapFragment : BaseFragment<FragmentMapBinding, MapViewModel>(),
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    fun onMarkerItemSelected(marker: MapPOIItem) {
+
     }
 
     override fun onRequestPermissionsResult(
