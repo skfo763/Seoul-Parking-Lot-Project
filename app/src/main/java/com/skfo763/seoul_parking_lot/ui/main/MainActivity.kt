@@ -24,4 +24,8 @@ class MainActivity : AppCompatActivity(){
                 as? NavHostFragment ?: return
         NavigationUI.setupWithNavController(bnv_main_bottom_navigation_bar, host.navController)
     }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
 }
